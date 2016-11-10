@@ -8,7 +8,7 @@ const int delayMsec = 60;
 const int maxSampleSize = 5;
 const int maxFaultSize = 5;
 
-const int errorTreshold = 0.1;
+const float treshold = 0.1;
 
 bool heartbeatDetected() {
 	static int prevValue = 0;
@@ -43,7 +43,7 @@ void dataProcess(int bpm) {
 		if (sampleSize > 0) {
 			int prevValue = sample[sampleSize - 1];
 
-			if (bpm * (1 + errorTreshold) > prevValue && bpm * (1 - errorTreshold) < prevValue) {
+			if (bpm * (1 + treshold) > prevValue && bpm * (1 - treshold) < prevValue) {
 				sample[sampleSize] = bpm;
 				sampleSize++;
 
@@ -56,7 +56,7 @@ void dataProcess(int bpm) {
 					sample[i] = fault[i];
 				}
 
-				sampleSize = maxSampleSize;
+				sampleSize = 5;
 				faultSize = 0;
 			}
 		} else {
@@ -64,14 +64,14 @@ void dataProcess(int bpm) {
 			sampleSize++;
 		}
 	} else {
-		int avgValue = sample(sample);
+		int avgValue = getAverageValue(sample);
 
-		if (bpm * (1 + errorTreshold) > avgValue && bpm * (1 - errorTreshold) < avgValue) {
-			for (int i = 0; i < 4 ; i++) {
+		if (bpm * (1 + treshold) > avgValue && bpm * (1 - treshold) < avgValue) {
+			for (int i = 0; i < maxSampleSize - 1 ; i++) {
 				sample[i] = sample[i + 1];
 			}
 
-			sample[4] = bpm;
+			sample[maxSampleSize - 1] = bpm;
 			faultSize = 0;
 
 			Serial.println(getAverageValue(sample));
@@ -88,7 +88,7 @@ void dataProcess(int bpm) {
 	}
 }
 
-int getAverageValue(int data[maxSampleSize]) {
+int getAverageValue(int data[]) {
 	int sum = 0;
 
 	for (int i = 0; i < maxSampleSize; i++) {
@@ -122,7 +122,7 @@ void loop() {
 		digitalWrite(ledPin, 0);
 	}
 
-	elapsedMs += delayMsec;
-
 	delay(delayMsec);
+
+	elapsedMs += delayMsec;
 }
