@@ -65,19 +65,19 @@ all: 15_TemperatureAndHumidity
 15_TemperatureAndHumidity: $(HEX)
 	@echo 'Building target: $@'
 	@echo 'Printing size:'
-	"/Applications/sloeber.app/Contents/Eclipse/arduinoPlugin/tools/arduino/avr-gcc/4.9.2-atmel3.5.3-arduino2/bin/avr-size" -A "/Users/tamasruszka/Development/Projects/Arduino/15_TemperatureAndHumidity/Release/15_TemperatureAndHumidity.elf"
+	"/Applications/sloeber.app/Contents/Eclipse/arduinoPlugin/tools/arduino/avr-gcc/4.9.2-atmel3.5.3-arduino2/bin/avr-size" -A "/Users/tamasruszka/Development/Projects/Github/ArduinoProjects/Tutorials/ KY-Series/15_TemperatureAndHumidity/Release/15_TemperatureAndHumidity.elf"
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 arduino.ar: $(AR_OBJ)
 	@echo 'Starting archiver'
-	"/Applications/sloeber.app/Contents/Eclipse/arduinoPlugin/tools/arduino/avr-gcc/4.9.2-atmel3.5.3-arduino2/bin/avr-gcc-ar" rcs "/Users/tamasruszka/Development/Projects/Arduino/15_TemperatureAndHumidity/Release/arduino.ar"  arduino.ar $(AR_OBJ)
+	"/Applications/sloeber.app/Contents/Eclipse/arduinoPlugin/tools/arduino/avr-gcc/4.9.2-atmel3.5.3-arduino2/bin/avr-gcc-ar" rcs "/Users/tamasruszka/Development/Projects/Github/ArduinoProjects/Tutorials/ KY-Series/15_TemperatureAndHumidity/Release/arduino.ar"  arduino.ar $(AR_OBJ)
 	@echo 'Finished building: $@'
 	@echo ' '
 
 15_TemperatureAndHumidity.elf: $(LINK_OBJ) $(AR)
 	@echo 'Starting combiner'
-	"/Applications/sloeber.app/Contents/Eclipse/arduinoPlugin/tools/arduino/avr-gcc/4.9.2-atmel3.5.3-arduino2/bin/avr-gcc" -Os -flto -fuse-linker-plugin -Wl,--gc-sections -mmcu=atmega328p -o "/Users/tamasruszka/Development/Projects/Arduino/15_TemperatureAndHumidity/Release/15_TemperatureAndHumidity.elf"  $(LINK_OBJ) $(AR)  "-L/Users/tamasruszka/Development/Projects/Arduino/15_TemperatureAndHumidity/Release" -lm
+	"/Applications/sloeber.app/Contents/Eclipse/arduinoPlugin/tools/arduino/avr-gcc/4.9.2-atmel3.5.3-arduino2/bin/avr-gcc" -Os -flto -fuse-linker-plugin -Wl,--gc-sections -mmcu=atmega328p -o "/Users/tamasruszka/Development/Projects/Github/ArduinoProjects/Tutorials/ KY-Series/15_TemperatureAndHumidity/Release/15_TemperatureAndHumidity.elf"  $(LINK_OBJ) $(AR)  "-L/Users/tamasruszka/Development/Projects/Github/ArduinoProjects/Tutorials/ KY-Series/15_TemperatureAndHumidity/Release" -lm
 	@echo 'Finished building: $@'
 	@echo ' '
 
