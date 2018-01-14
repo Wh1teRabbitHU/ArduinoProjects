@@ -6,4 +6,9 @@
 # Trash files
 **/.ino.cpp
 **/.DS_Store
-**/.vscode
+**/.travis.yml
+**/lib/readme.txt
+
+**/.vscode/**
+**/.pioenvs/**
+**/.piolibdeps/**
